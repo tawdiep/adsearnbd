@@ -1,163 +1,98 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Telegram Mini App</title>
-<style>
-  /* Reset */
-  * {
-    margin: 0; padding: 0; box-sizing: border-box;
-  }
-  body {
-    font-family: 'Arial', sans-serif;
-    background: white;
-    color: black;
-    -webkit-tap-highlight-color: transparent; /* Remove blue highlight on tap */
-    user-select: none;
-  }
+<div id="startMenu" style="visibility: visible;">
+      <div id="mopeMenu" class="boxshadow">
 
-  .container {
-    max-width: 360px; /* Typical mobile width */
-    margin: 0 auto;
-    padding: 16px;
-  }
+        <img id="logo" src="img/logo.png">
+        <div id="onconnectDiv" style="visibility:visible;">
+          <br>
+          <select id="serverSelect"><optgroup label="New York, USA (Ping ?ms)"><option>New York 1 [31 players ]</option></optgroup><optgroup label="Dallas, USA (Ping ?ms)"><option>Dallas 1 [20 players ]</option></optgroup><optgroup label="Los Angeles, USA (Ping ?ms)"><option>Los Angeles 1 [20 players ]</option></optgroup><optgroup label="Sao Paulo, Brazil (Ping ?ms)"><option>Sao Paulo 1 [32 players ]</option></optgroup><optgroup label="Frankfurt, Germany (Ping ?ms)"><option>Frankfurt 1 [201 players ]</option></optgroup><optgroup label="Paris, France (Ping ?ms)"><option>Paris 1 [119 players ]</option></optgroup><optgroup label="Stockholm, Sweden (Ping ?ms)"><option>Stockholm 1 [81 players ]</option></optgroup><optgroup label="Singapore, Singapore (Ping 72ms)"><option>Singapore 1 [136 players ]</option></optgroup><optgroup label="Sydney, Australia (Ping ?ms)"><option>Sydney 1 [17 players ]</option></optgroup></select>
 
-  /* Top text block - as in your screenshot */
-  .top-text {
-    font-weight: 700;
-    font-size: 22px;
-    line-height: 28px;
-    margin-bottom: 10px;
-  }
 
-  /* "Earn Now" clickable text */
-  .earn-now {
-    color: #DD6306;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 24px;
-    cursor: pointer;
-    user-select: none;
-    display: inline-block;
-  }
+          <div id="onPlayReadyWrap">
+            <div class="optionsBtn">
+              <button id="settingsButton" class="button" type="submit" style="background-color:transparent; border-color:transparent;">
+                <img src="img/settings.png" width="30" height="30">
+              </button>
 
-  /* Bottom section container */
-  .bottom-section {
-    margin-top: 40px;
-  }
 
-  /* Bottom buttons container */
-  .bottom-buttons {
-    display: flex;
-    justify-content: space-around;
-    padding: 12px 0;
-    border-top: 1px solid #ccc;
-  }
+            </div>
 
-  .bottom-button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 12px;
-    color: #5F6062;
-    cursor: default;
-    user-select: none;
-    position: relative;
-    width: 56px;
-  }
 
-  /* Icon container (using placeholders for icons) */
-  .icon {
-    width: 24px;
-    height: 24px;
-    margin-bottom: 4px;
-    pointer-events: none; /* icons themselves not clickable */
-  }
+            <div id="nickInputContainer" style="display: block;">
+              <input id="nickInput" autofocus="" placeholder="Your name" maxlength="15" style="width: 100%; height: 40px; line-height: 36px;">
+            </div>
 
-  /* Clickable texts in bottom buttons that redirect */
-  .clickable-text {
-    color: #DD6306;
-    cursor: pointer;
-    user-select: none;
-    font-weight: 700;
-  }
 
-  /* Remove any focus or active outlines */
-  a, button, .earn-now, .clickable-text {
-    outline: none;
-  }
+            <p id="serverResponse">
+            </p>
+            <div id="moneyRectWrap">
+              <div id="moneyRect">
+                <div id="mope-io_300x250">
+                </div>
+              </div>
 
-  a, button {
-    border: none;
-    background: none;
-  }
 
-  /* Disable tap highlight on mobile */
-  a, button, .earn-now, .clickable-text {
-    -webkit-tap-highlight-color: transparent;
-  }
-</style>
-</head>
-<body>
-  <div class="container">
-    <div class="top-text">
-      Click <span class="earn-now" id="earnNow">Earn Now</span> to get paid USDT manually.
-    </div>
+              <a>
+                <button id="startButton" class="startButton1">Play</button>
+              </a>
+            </div>
 
-    <!-- Bottom section (like screenshot) -->
-    <div class="bottom-section">
-      <div class="bottom-buttons">
+            <div id="connecting" style="display: none;">
+              <div class="connecting-inner">
+                <div id="conimgContainer">
+                  <img class="conimg" src="/assets/s/1/skins/land/mouse/0/mouse.png" width="80px">
+                </div>
+                <p>Connecting...</p>
+                <p id="txtServer" style="font-size:14px;">(Singapore 1)</p>
+              </div>
+            </div>
 
-        <!-- Earn button with clickable text -->
-        <div class="bottom-button" style="cursor: default;">
-          <img class="icon" src="https://cdn-icons-png.flaticon.com/512/1006/1006553.png" alt="Earn Icon" />
-          <span class="clickable-text" id="bottomEarn">Earn</span>
+
+          </div>
+          <div id="optionsDiv">
+            <button id="closeBut" type="submit" class="button" style="background-color:transparent; border-color:transparent;">
+              <img src="img/x.png" width="35" height="35">
+            </button>
+
+
+            <button id="button_mute" class="button" type="submit" style="background-color:transparent; border-color:transparent;">
+              <img id="button_mute_img" src="img/sound_on.png" width="30" height="30" title="Mute/unmute sounds">
+            </button>
+
+            <div id="options_graphicsButs">
+              <p>Graphics (Use Medium/Low if the game lags for you) </p>
+              <p id="graphics_fps"> FPS 60 (perfect)</p>
+
+              <button id="graphicsBut_low" style="opacity: 1;">Low Graphics</button>
+              <button id="graphicsBut_med" style="opacity: 1;">Medium Graphics</button>
+              <button id="graphicsBut_hd" disabled="" style="opacity: 0.5;">High Graphics</button>
+            </div>
+
+
+            <h3>Options:</h3>
+            <div id="optionsContainer">
+            <label><input type="checkbox" id="options_noImages"><span style="color: black;" '="">No Animal images  </span></label><label><input type="checkbox" id="options_noNames"><span style="color: black;" '="">No Names &amp; Chat  </span></label><label><input type="checkbox" id="options_disableFilter"><span style="color: black;" '="">Disable Profanity Filter</span></label></div>
+            <br>
+            <a>
+              <button id="btnSpectate" style="display:block">Spectate</button>
+            </a>
+          </div>
+
+
         </div>
 
-        <!-- Task button with clickable text -->
-        <div class="bottom-button" style="cursor: default;">
-          <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2921/2921222.png" alt="Task Icon" />
-          <span class="clickable-text" id="bottomTask">Task</span>
-        </div>
-
-        <!-- Other buttons with icons only, no click -->
-        <div class="bottom-button">
-          <img class="icon" src="https://cdn-icons-png.flaticon.com/512/1828/1828778.png" alt="Button 3" />
-          <span>Wallet</span>
-        </div>
-
-        <div class="bottom-button">
-          <img class="icon" src="https://cdn-icons-png.flaticon.com/512/565/565547.png" alt="Button 4" />
-          <span>Settings</span>
-        </div>
-
-        <div class="bottom-button">
-          <img class="icon" src="https://cdn-icons-png.flaticon.com/512/565/565490.png" alt="Button 5" />
-          <span>Profile</span>
-        </div>
       </div>
+
+
+      <div class="footer">
+        <h2 class="announcement">ANNOUNCEMENT</h2>
+        <h4>Coins are back in Mope.io! And be sure to check out Gems, our new premium currency.</h4>
+
+        <div class="button-container">
+          <a href="https://discord.com/invite/nQAVB9c" class="join-button" target="_blank">
+            Join Discord
+          </a>
+        </div>
+
+      </div>
+
     </div>
-  </div>
-
-  <script>
-    // No border or highlight on click
-    function openUrlSameTab(url) {
-      location.href = url;
-    }
-
-    // Add event listeners to clickable texts with exact area coverage
-    document.getElementById('earnNow').addEventListener('click', () => {
-      openUrlSameTab('https://www.youtube.com/');
-    });
-
-    document.getElementById('bottomEarn').addEventListener('click', () => {
-      openUrlSameTab('https://facebook.com/');
-    });
-
-    document.getElementById('bottomTask').addEventListener('click', () => {
-      openUrlSameTab('https://webogram.com');
-    });
-  </script>
-</body>
-</html>
