@@ -1,33 +1,137 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <link rel="stylesheet" href="css/assets-uni.7ab536a7.css">
 
-    <meta charset="utf-8">
-    <script>
-      var coverSupport =
-        'CSS' in window &&
-        typeof CSS.supports === 'function' &&
-        (CSS.supports('top: env(a)') || CSS.supports('top: constant(a)'))
-      document.write(
-        '<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' +
-          (coverSupport ? ', viewport-fit=cover' : '') +
-          '" />',
-      )
-    </script>
-    <title>Taskflix</title>
-    <link rel="manifest" href="/static/pwa/manifest.json">
-    <!--preload-links-->
-    <!--app-context-->
-    <script type="module" crossorigin src="js/assets-index-6934974f.js"></script>
-    <link rel="stylesheet" href="css/assets-index-865f47e4.css">
-  </head>
+import { useState, useEffect } from 'react';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Home, CreditCard, List, Send, User } from 'lucide-react';
 
-  <body>
-    <!-- id="installButton" -->
-    <button style="display: none">Add to Home Screen</button>
-    <div id="app"><!--app-html--></div>
-    <script src="js/v0-api.js"></script>
-    
-  </body>
-</html>
+const Index = () => {
+  const [userEarnings, setUserEarnings] = useState(0);
+
+  // Load earnings from localStorage on component mount
+  useEffect(() => {
+    const savedEarnings = localStorage.getItem('userEarnings');
+    if (savedEarnings) {
+      setUserEarnings(parseFloat(savedEarnings));
+    }
+  }, []);
+
+  // Save earnings to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('userEarnings', userEarnings.toString());
+  }, [userEarnings]);
+
+  const handleEarnNowClick = () => {
+    // Increase balance by 0.25
+    setUserEarnings(prev => prev + 0.25);
+    // Redirect to external site in current tab
+    window.location.href = 'https://wrestforsake.com/cdjc17d7?key=f68374269f51ac1f9e524c3543c5b855';
+  };
+
+  const handleEarnClick = () => {
+    // Increase balance by 0.25
+    setUserEarnings(prev => prev + 0.25);
+    // Redirect to external site in current tab
+    window.location.href = 'https://wrestforsake.com/cdjc17d7?key=f68374269f51ac1f9e524c3543c5b855';
+  };
+
+  const handleTaskClick = () => {
+    window.open('https://facebook.com', '_blank');
+  };
+
+  const handleReferEarnClick = () => {
+    window.open('https://guga.com', '_blank');
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-purple-900 via-purple-800 to-purple-900 text-white overflow-hidden">
+      {/* Main Content */}
+      <div className="flex flex-col min-h-screen">
+        {/* Hero Section */}
+        <div className="flex-1 px-6 pt-12 pb-8">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold mb-2">Welcome AdsEarn BD</h1>
+            <p className="text-lg text-purple-200 mb-8">Start Earning Money Now</p>
+            
+            <Button 
+              onClick={handleEarnNowClick}
+              className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-full text-lg font-semibold mb-12"
+            >
+              Earn Now
+            </Button>
+          </div>
+
+          {/* Character Illustration */}
+          <div className="flex justify-center mb-8">
+            <div className="w-64 h-48 relative">
+              <img 
+                src="data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMTAwcHgiIGhlaWdodD0iMTAwcHgiIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAxMDAgMTAwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48Y2lyY2xlIGZpbGw9IiM4MDE2MTUiIGN4PSI1MSIgY3k9IjUyIiByPSI0MS41Ii8+PGxpbmVhckdyYWRpZW50IGlkPSJTVkdJRF8xXyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSI0OS45OTk1IiB5MT0iOC41IiB4Mj0iNDkuOTk5NSIgeTI9IjkxLjUwMDUiPjxzdG9wICBvZmZzZXQ9IjAiIHN0eWxlPSJzdG9wLWNvbG9yOiNkNjU0MzEiLz48c3RvcCAgb2Zmc2V0PSIxIiBzdHlsZT0ic3RvcC1jb2xvcjojYjUxYzFjIi8+PC9saW5lYXJHcmFkaWVudD48Y2lyY2xlIGZpbGw9InVybCgjU1ZHSURfMV8pIiBjeD0iNTAiIGN5PSI1MCIgcj0iNDEuNSIvPjxnPiA8cGF0aCBmaWxsPSJub25lIiBkPSJNNjMuMjE1LDM2Ljc3N2MtMS4xMjgsMC4xODUtMS4zNjQsNC42MDMtMC41MzgsOS44NDhjMC44NDQsNS4yNiwyLjQyOSw5LjM5MywzLjU1OCw5LjIwOCBjMS4xMy0wLjE4NiwxLjM2Ni00LjU4NywwLjU0MS05Ljg0OEM2NS45NDcsNDAuNzIzLDY0LjM0NiwzNi42MDgsNjMuMjE1LDM2Ljc3N3oiLz4gPHBhdGggZmlsbD0iI0ZGRkZGRiIgZD0iTTc1LjIyNiw0NC40Yy0xLjcyMi0xMC44NzctNi41NDUtMTkuMTczLTEwLjc0MS0xOC40OThjLTEuODU3LDAuMjg1LTMuMjksMi4yNTgtNC4xNjgsNS4yOTQgYy0xLjgyLDEuNjE4LTQuNjAzLDMuMzA0LTcuNzcxLDQuOTA2bDEuNzM0LDMuNTQxbDUuMzk2LTIuNjQ3Yy0wLjE1MiwwLjc0My0wLjI3LDEuNTg1LTAuMzM3LDIuNDk4IGMwLjAxNywyLjMwOSwwLjIxOSw0Ljc3MSwwLjYyMyw3LjMxN2MwLjQzOSwyLjc5OSwxLjA4LDUuNDMsMS44NzMsNy43NTdjMC4yNzEsMC41NTYsMC41NTgsMS4wNDYsMC44NTksMS40NjdsLTcuMjgyLTAuNjkgbC0wLjMwNCwzLjIzNmMzLjY1OCwwLjQyMyw3LjA0NiwxLjE4LDkuNjYxLDIuNDI5YzEuODU0LDIuOTY4LDMuOTY0LDQuNjQsNS45NSw0LjMxN0M3NC45MjIsNjQuNjY5LDc2Ljk0NCw1NS4yOTMsNzUuMjI2LDQ0LjR6IE02Ni4yMzQsNTUuODMyYy0xLjEyOSwwLjE4Ni0yLjcxNC0zLjk0Ny0zLjU1OC05LjIwOGMtMC44MjYtNS4yNDUtMC41OS05LjY2MywwLjUzOC05Ljg0OGMxLjEzMS0wLjE2OCwyLjczMiwzLjk0NiwzLjU2MSw5LjIwOCBDNjcuNjAxLDUxLjI0NSw2Ny4zNjQsNTUuNjQ2LDY2LjIzNCw1NS44MzJ6Ii8+IDxwYXRoIGZpbGw9IiNGRkZGRkYiIGQ9Ik01MS4xNiwzNi43NzhsLTEuNTUyLDAuNzQyYy03Ljg3NCwzLjY0Mi0xNi45MTMsNi42NjEtMTkuNDI2LDcuNTA0Yy0wLjAzMywwLjAxNy0wLjA1LDAuMDE3LTAuMDg0LDAuMDE3IGMtMy40NzMsMC41NC01LjkzNiwzLjUyNC01LjkzNiw2LjkzYzAsMC4zNTQsMC4wMzQsMC43MjYsMC4wODQsMS4wOTdjMC42MDgsMy43NzcsNC4xMzEsNi4zOSw3LjkyNSw1Ljg1MWwxLjYwMyw5LjI2IGMwLjI4NiwwLjgwOCwxLjAyOCwxLjkzOCwyLjcxNCwxLjY1MWwzLjMzOS0wLjI4N2MxLjY4Ni0wLjMwNCwxLjkzOS0xLjAyOSwxLjY1My0yLjcxNmwtMS40LTguNTgyIGMzLjk5Ni0wLjE4OCw4Ljg1My0wLjI1NiwxMy40NTcsMC4xNjdjMC41MjEsMC4wNTEsMS4wNjMsMC4xMDMsMS41NjcsMC4xNjlsMC4zMDQtMy4yMzZsLTEuNTY3LTAuMTUyTDQzLjQ3LDU0LjIxMyBjMCwwLDAsMC0wLjAxOCwwLjAwMWMtMS4wOTYsMC4wODUtMi4xNzYtMC41NC0yLjktMS41ODRjLTAuNDM4LTAuNjI1LTAuNzU4LTEuNC0wLjg5NC0yLjI2MWMtMC4wNS0wLjMwMy0wLjA2Ni0wLjU4OC0wLjA2Ni0wLjg3NSBjMC0wLjQ1NiwwLjA1LTAuODk0LDAuMTY3LTEuMjk5YzAuMzU1LTEuMzk5LDEuMjgyLTIuNDQ1LDIuNDk3LTIuNjQ4bDkuMTA2LTQuNDdsMi45MTctMS40MzNsLTEuNzM2LTMuNTQxIEM1Mi4wODgsMzYuMzIzLDUxLjYzMSwzNi41Niw1MS4xNiwzNi43Nzh6Ii8+IDwvZz48L3N2Zz4=" 
+                alt="SVG Icon" 
+                className="w-full h-full object-contain"
+              />
+            </div>
+          </div>
+
+          {/* User Earnings Card */}
+          <Card className="bg-gradient-to-r from-blue-500 to-cyan-400 border-none mb-6 mx-4">
+            <CardContent className="p-6">
+              <div className="text-white">
+                <div className="text-4xl font-bold mb-1">$</div>
+                <div className="text-5xl font-bold mb-2">{userEarnings.toFixed(2)}</div>
+                <div className="text-blue-100 text-lg">User Earnings</div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Refer & Earn Button */}
+          <div className="flex justify-end px-4 mb-8">
+            <Button 
+              onClick={handleReferEarnClick}
+              className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-full flex items-center gap-2"
+            >
+              <User className="w-4 h-4" />
+              Refer & Earn
+            </Button>
+          </div>
+        </div>
+
+        {/* Bottom Navigation */}
+        <div className="bg-purple-800/50 border-t border-purple-600/30">
+          <div className="flex justify-around items-center py-4 px-4">
+            <button className="flex flex-col items-center gap-1 text-orange-400">
+              <Home className="w-6 h-6" />
+              <span className="text-xs">Home</span>
+            </button>
+            
+            <button 
+              onClick={handleEarnClick}
+              className="flex flex-col items-center gap-1 text-white"
+            >
+              <CreditCard className="w-6 h-6" />
+              <span className="text-xs">Earn</span>
+            </button>
+            
+            <button 
+              onClick={handleTaskClick}
+              className="flex flex-col items-center gap-1 text-white"
+            >
+              <List className="w-6 h-6" />
+              <span className="text-xs">Tasks</span>
+            </button>
+            
+            <button className="flex flex-col items-center gap-1 text-white">
+              <Send className="w-6 h-6" />
+              <span className="text-xs">Withdraw</span>
+            </button>
+            
+            <button className="flex flex-col items-center gap-1 text-white">
+              <User className="w-6 h-6" />
+              <span className="text-xs">Profile</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Index;
