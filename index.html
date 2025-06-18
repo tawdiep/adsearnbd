@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Telegram Mini App</title>
+<style>
+  /* Reset */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  body {
+    font-family: 'Arial', sans-serif;
+    background: white;
+    color: black;
+    -webkit-tap-highlight-color: transparent; /* Remove blue highlight on tap */
+    user-select: none;
+  }
+
+  .container {
+    max-width: 360px; /* Typical mobile width */
+    margin: 0 auto;
+    padding: 16px;
+  }
+
+  /* Top text block - as in your screenshot */
+  .top-text {
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 28px;
+    margin-bottom: 10px;
+  }
+
+  /* "Earn Now" clickable text */
+  .earn-now {
+    color: #DD6306;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    cursor: pointer;
+    user-select: none;
+    display: inline-block;
+  }
+
+  /* Bottom section container */
+  .bottom-section {
+    margin-top: 40px;
+  }
+
+  /* Bottom buttons container */
+  .bottom-buttons {
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 0;
+    border-top: 1px solid #ccc;
+  }
+
+  .bottom-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    color: #5F6062;
+    cursor: default;
+    user-select: none;
+    position: relative;
+    width: 56px;
+  }
+
+  /* Icon container (using placeholders for icons) */
+  .icon {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 4px;
+    pointer-events: none; /* icons themselves not clickable */
+  }
+
+  /* Clickable texts in bottom buttons that redirect */
+  .clickable-text {
+    color: #DD6306;
+    cursor: pointer;
+    user-select: none;
+    font-weight: 700;
+  }
+
+  /* Remove any focus or active outlines */
+  a, button, .earn-now, .clickable-text {
+    outline: none;
+  }
+
+  a, button {
+    border: none;
+    background: none;
+  }
+
+  /* Disable tap highlight on mobile */
+  a, button, .earn-now, .clickable-text {
+    -webkit-tap-highlight-color: transparent;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="top-text">
+      Click <span class="earn-now" id="earnNow">Earn Now</span> to get paid USDT manually.
+    </div>
+
+    <!-- Bottom section (like screenshot) -->
+    <div class="bottom-section">
+      <div class="bottom-buttons">
+
+        <!-- Earn button with clickable text -->
+        <div class="bottom-button" style="cursor: default;">
+          <img class="icon" src="https://cdn-icons-png.flaticon.com/512/1006/1006553.png" alt="Earn Icon" />
+          <span class="clickable-text" id="bottomEarn">Earn</span>
+        </div>
+
+        <!-- Task button with clickable text -->
+        <div class="bottom-button" style="cursor: default;">
+          <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2921/2921222.png" alt="Task Icon" />
+          <span class="clickable-text" id="bottomTask">Task</span>
+        </div>
+
+        <!-- Other buttons with icons only, no click -->
+        <div class="bottom-button">
+          <img class="icon" src="https://cdn-icons-png.flaticon.com/512/1828/1828778.png" alt="Button 3" />
+          <span>Wallet</span>
+        </div>
+
+        <div class="bottom-button">
+          <img class="icon" src="https://cdn-icons-png.flaticon.com/512/565/565547.png" alt="Button 4" />
+          <span>Settings</span>
+        </div>
+
+        <div class="bottom-button">
+          <img class="icon" src="https://cdn-icons-png.flaticon.com/512/565/565490.png" alt="Button 5" />
+          <span>Profile</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // No border or highlight on click
+    function openUrlSameTab(url) {
+      location.href = url;
+    }
+
+    // Add event listeners to clickable texts with exact area coverage
+    document.getElementById('earnNow').addEventListener('click', () => {
+      openUrlSameTab('https://www.youtube.com/');
+    });
+
+    document.getElementById('bottomEarn').addEventListener('click', () => {
+      openUrlSameTab('https://facebook.com/');
+    });
+
+    document.getElementById('bottomTask').addEventListener('click', () => {
+      openUrlSameTab('https://webogram.com');
+    });
+  </script>
+</body>
+</html>
